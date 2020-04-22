@@ -1,0 +1,6 @@
+{
+    "require": {
+        "phalcon/ide-stubs": "^4.0",
+        "vlucas/phpdotenv": "^4.1"
+    }
+}
