@@ -66,7 +66,8 @@ $di->setShared('view', function () {
 $di->setShared('db', function () {
     $config = $this->getConfig();
 
-    $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+    // $class = 'Phalcon\Db\Adapter\Pdo\\' . $config->database->adapter;
+    $dbAdapter = $config->database->adapter;
     $params = [
         'host'     => $config->database->host,
         'username' => $config->database->username,
@@ -79,7 +80,7 @@ $di->setShared('db', function () {
         unset($params['charset']);
     }
 
-    return new $class($params);
+    return new $dbAdapter($params);
 });
 
 
