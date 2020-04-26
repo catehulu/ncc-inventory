@@ -19,6 +19,14 @@ $router->addPost(
 );
 
 $router->addGet(
+    '/logout',
+    [
+        'controller' => 'index',
+        'action' => 'logout'
+    ]
+);
+
+$router->addGet(
     '/register',
     [
         'controller' => 'users',
@@ -31,6 +39,14 @@ $router->addPost(
     [
         'controller' => 'users',
         'action' => 'register'
+    ]
+);
+
+$router->addGet(
+    '/404',
+    [
+        'controller' => 'error',
+        'action' => 'notfound'
     ]
 );
 

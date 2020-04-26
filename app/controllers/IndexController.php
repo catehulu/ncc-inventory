@@ -1,24 +1,28 @@
 <?php
 declare(strict_types=1);
 
-
+use Phalcon\Mvc\Model\Query;
 
 class IndexController extends ControllerBase
 {
 
     public function indexAction()
     {
-        // $db = $this->getDI()->get('db');
+        $query = "SELECT id FROM Users";
+        $createQuery = new Query($query, $this->getDI());
+        $posts = $createQuery->execute();
+        echo var_dump('abc');
+        // // $db = $this->getDI()->get('db');
 
-        // $sql = "select * from users where id=:id";
-        // $data = [
-        //     'id' => 0
-        // ];
-        // $result = $db->query($sql,$data);
-        // $user = $result->fetchAll(\Phalcon\Db\Enum::FETCH_OBJ);
+        // // $sql = "select * from users where id=:id";
+        // // $data = [
+        // //     'id' => 0
+        // // ];
+        // // $result = $db->query($sql,$data);
+        // // $user = $result->fetchAll(\Phalcon\Db\Enum::FETCH_OBJ);
 
-        $user = $this->session->get('auth');
-        echo var_dump($user);
+        // $user = $this->session->get('auth');
+        // echo var_dump($user);
     }
 
     public function loginFormAction()
@@ -41,13 +45,26 @@ class IndexController extends ControllerBase
             ]
         );
         if ($user) {
-            $this->session->set('auth',$user);
-            $this->flashSession->success('Anda berhasil login!');
+            $check = $this->security->checkHash($password, $user->password);
+            if ($check) {
+                $this->session->set('auth',$user);
+                $this->flashSession->success('Anda berhasil login!');
+            } else {
+                $this->flashSession->error('Anda gagal login!');
+                return $this->response->redirect('/login');
+            }
         } else {
             $this->flashSession->error('Anda gagal login!');
             return $this->response->redirect('/login');
         }
 
+        return $this->response->redirect('/');
+    }
+
+    public function logoutAction()
+    {
+        $this->session->remove('auth');
+        $this->flashSession->success('Anda telah logout!');
         return $this->response->redirect('/');
     }
 }

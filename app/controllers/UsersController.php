@@ -2,12 +2,12 @@
 declare(strict_types=1);
 
 
-class UsersController extends ControllerBase
+class UsersController extends AuthControllerBase
 {
 
     public function indexAction()
     {
-        echo var_dump('disini');
+        
     }
 
     public function registerFormAction()
@@ -21,7 +21,6 @@ class UsersController extends ControllerBase
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
-        echo var_dump($email, $password);
         $user = new Users;
         $user->id = $this->security->getRandom()->uuid();
         $user->nama = $nama;
@@ -34,7 +33,7 @@ class UsersController extends ControllerBase
 
     public function dashboardAction()
     {
-
+        
     }
 
 }

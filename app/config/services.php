@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 use Phalcon\Escaper;
 use Phalcon\Flash\Direct as Flash;
+use Phalcon\Flash\Session as FlashSession;
 use Phalcon\Mvc\Model\Metadata\Memory as MetaDataAdapter;
 use Phalcon\Mvc\View;
 use Phalcon\Mvc\View\Engine\Php as PhpEngine;
@@ -122,4 +123,15 @@ $di->setShared('session', function () {
     $session->start();
 
     return $session;
+});
+
+
+$di->set("flashSession", function () {
+    $flashSession = new FlashSession();
+    $flashSession->setCssClasses(array(
+        'error' => 'alert alert-danger',
+        'success' => 'alert alert-success',
+        'notice' => 'alert alert-info'
+    ));
+    return $flashSession;
 });

@@ -7,14 +7,15 @@ class Inventaris extends Model
 {
     public $id;
     public $nama;
+    public $deskripsi;
     public $jumlah;
     /**
      * This model is mapped to the table Inventaris
      */
-    public function getSource()
-    {
-        return 'Inventaris';
-    }
+    // public function getSource()
+    // {
+    //     return 'Inventaris';
+    // }
 
     /**
      * A car only has a Brand, but a Brand have many Cars
