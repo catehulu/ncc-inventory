@@ -4,6 +4,9 @@
 CREATE TABLE [dbo].[Peminjaman](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[nama] [varchar](50) NULL,
+	[email] [varchar](50) NULL,
+	[no_telp] [varchar](50) NULL,
+	[jumlah] [int] NULL,
 	[status] [int] NULL,
 	[inventaris_id] [int] NULL,
 	[kode] [char](5) NULL,

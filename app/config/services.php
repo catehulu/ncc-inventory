@@ -47,13 +47,15 @@ $di->setShared('view', function () {
             $volt = new VoltEngine($view, $this);
 
             $volt->setOptions([
+                'always'    => true,
                 'path' => $config->application->cacheDir,
-                'separator' => '_'
+                'separator' => '_',
+                'extension' => '.php'
             ]);
 
             return $volt;
         },
-        '.phtml' => PhpEngine::class
+        // '.phtml' => PhpEngine::class
 
     ]);
 

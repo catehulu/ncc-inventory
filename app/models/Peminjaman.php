@@ -7,20 +7,25 @@ class Peminjaman extends Model
 {
     public $id;
     public $nama;
+    public $email;
+    public $no_telp;
     public $status;
     public $inventaris_id;
     public $kode;
+    /**
+     * This model is mapped to the table Inventaris
+     */
+    public function getSource()
+    {
+        return 'Peminjaman';
+    }
 
-    public function barang(){
-        $id = $this->id;
-        $connection = $this->getDI()->get('db');
-        $sql = 'select * from peminjaman where peminjaman_id = :inventaris_id';
-        $data = [
-            'inventaris_id' => $id
-        ];
-        $query = $connection->query($sql,$data);
-        $result = $query->fetchAll(\Phalcon\Db\Enum::FETCH_OBJ);
-        return $result;
+    /**
+     * A car only has a Brand, but a Brand have many Cars
+     */
+    public function initialize()
+    {
+        $this->belongsTo('inventaris_id','Inventaris','id');
     }
 }
 
