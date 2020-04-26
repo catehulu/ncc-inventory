@@ -6,26 +6,30 @@ class PeminjamanController extends ControllerBase
 
     public function indexAction()
     {
-
     }
 
     public function createAction()
     {
-
+        $inventarises = Inventaris::find();
+        $this->view->inventarises = $inventarises;
     }
 
     public function storeAction()
     {
         $nama = $this->request->getPost('nama');
+        $nrp = $this->request->getPost('nrp');
         $email = $this->request->getPost('email');
         $no_telp = $this->request->getPost('no_telp');
+        $tanggal_peminjaman = $this->request->getPost('tanggal_peminjaman');
+        $tanggal_pengembalian = $this->request->getPost('tanggal_pengembalian');
+        $deskripsi = $this->request->getPost('deskripsi');
         $status = 0;
         $inventaris_id = $this->request->getPost('inventaris_id');
         $jumlah = $this->request->getPost('jumlah');
 
         $inventaris = Inventaris::findFirst(
             [
-                'condition' => 'id = :inventaris_id:',
+                'conditions' => 'id = :inventaris_id:',
                 'bind' => [
                     'inventaris_id' => $inventaris_id
                 ]
@@ -33,47 +37,42 @@ class PeminjamanController extends ControllerBase
         );
 
         if (!$inventaris) {
-            
+            $this->flashSession->error('Barang yang anda minta tidak ada!');
+            $this->response->redirect('/peminjaman');
         }
+
+        $kode = $this->generateCode(5);
 
         $peminjaman = new Peminjaman;
         $peminjaman->nama = $nama;
+        $peminjaman->nrp = $nrp;
         $peminjaman->email = $email;
         $peminjaman->no_telp = $no_telp;
-        $peminjaman->status = $status;
+        $peminjaman->status = $status;   
         $peminjaman->inventaris_id = $inventaris_id;
         $peminjaman->jumlah = $jumlah;
+        $peminjaman->tanggal_peminjaman = $tanggal_peminjaman;
+        $peminjaman->tanggal_pengembalian = $tanggal_pengembalian;
+        $peminjaman->deskripsi = $deskripsi;
+        $peminjaman->kode = $kode;
         $peminjaman->save();
+
+        $this->response->redirect('/peminjaman/kode/'.$kode);
     }
 
-    public function searchAction()
+    public function kodeAction($kode)
     {
-        $nama = $this->request->getPost('search');
-        $result = Inventaris::find(
+        $peminjam = Peminjaman::findFirst(
           [
-              'condition' => 'nama LIKE :nama:',
-              'bind' => [
-                  'nama' => $nama
-              ]
-          ]  
-        );
-
-        $this->view->result = $result;
-
-    }
-
-    public function kode($kode)
-    {
-        $result = Peminjaman::findFirst(
-          [
-              'condition' => 'kode LIKE :kode:',
+              'conditions' => 'kode = :kode:',
               'bind' => [
                   'kode' => $kode
               ]
           ]  
         );
 
-        $this->view->result = $result;
+
+        $this->view->peminjam = $peminjam;
 
     }
 
@@ -88,7 +87,7 @@ class PeminjamanController extends ControllerBase
 
     //     $inventaris = Inventaris::findFirst(
     //         [
-    //             'condition' => 'id = :inventaris_id:',
+    //             'conditions' => 'id = :inventaris_id:',
     //             'bind' => [
     //                 'inventaris_id' => $inventaris_id
     //             ]
@@ -114,6 +113,16 @@ class PeminjamanController extends ControllerBase
     // {
 
     // }
+
+    protected function generateCode($length = 5){
+        $characters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
+    }
 
 }
 

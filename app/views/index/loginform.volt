@@ -1,4 +1,7 @@
-<div class="card bg-light mx-auto" style="max-width: 400px;">
+{% extends "templates/main.volt" %}
+
+{% block content %}
+<div class="card bg-light mx-auto" style="max-width: 400px; margin-top:20px">
 <div class="card-header">
     Log in
 </div>
@@ -24,3 +27,5 @@
 </form>
 </div>
 </div> <!-- card.// -->
+
+{% endblock %}

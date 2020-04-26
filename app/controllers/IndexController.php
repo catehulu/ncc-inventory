@@ -1,17 +1,24 @@
 <?php
 declare(strict_types=1);
 
-use Phalcon\Mvc\Model\Query;
+use Phalcon\Mvc\Dispatcher;
 
 class IndexController extends ControllerBase
 {
+    public function beforeExecuteRoute(Dispatcher $dispatcher)
+    {
+        if ($this->session->has('auth')) {
+            return $this->dispatcher->forward(
+                [
+                    'controller'    => 'dashboard',
+                    'action'        => 'index'
+                ]
+            );
+        }
+    }
 
     public function indexAction()
     {
-        $query = "SELECT id FROM Users";
-        $createQuery = new Query($query, $this->getDI());
-        $posts = $createQuery->execute();
-        echo var_dump('abc');
         // // $db = $this->getDI()->get('db');
 
         // // $sql = "select * from users where id=:id";
@@ -27,7 +34,9 @@ class IndexController extends ControllerBase
 
     public function loginFormAction()
     {
-        
+        if ($this->session->has('auth')) {
+            return $this->response->redirect('/dashboard');
+        }   
     }
 
     public function loginAction()

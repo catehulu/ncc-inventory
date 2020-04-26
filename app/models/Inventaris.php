@@ -2,6 +2,8 @@
 declare(strict_types=1);
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Behavior\Timestampable;
+use Phalcon\Mvc\Model\Relation;
 
 class Inventaris extends Model
 {
@@ -18,11 +20,42 @@ class Inventaris extends Model
     // }
 
     /**
-     * A car only has a Brand, but a Brand have many Cars
+     * One inventaris can have many peminjaman
      */
     public function initialize()
     {
-        $this->hasMany('id','Peminjaman','inventaris_id');
+        $this->hasMany(
+            'id',
+            'Peminjaman',
+            'inventaris_id',
+            [
+                'foreignKey' => [
+                    'action' => Relation::ACTION_CASCADE,
+                ]
+            ]
+        );
+        
+        $this->addBehavior(
+            new Timestampable(
+                [
+                    'beforeCreate' => [
+                        'field'  => 'created_at',
+                        'format' => 'Y-m-d H:i:sP',
+                    ]
+                ]
+            )
+        );
+        
+        $this->addBehavior(
+            new Timestampable(
+                [
+                    'beforeUpdate' => [
+                        'field'  => 'updated_at',
+                        'format' => 'Y-m-d H:i:sP',
+                    ]
+                ]
+            )
+        );
     }
 
     // public function peminjamans() {

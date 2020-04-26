@@ -8,10 +8,11 @@
     <link rel="shortcut icon" type="image/x-icon" href="<?php echo $this->url->get('img/favicon.ico')?>"/>
     <!-- DataTabels -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="{{ this.url.getStatic('css/style.css') }}">
     {% block custom_css %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark  bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark  bg-primary" style='margin-bottom: 20px;'>
         <a class="navbar-brand" href="/">
             <img src="{{ this.url.get('img/ncc-logo.jpg') }}" height="30" class="d-inline-block align-top" alt="">
             NCC Inventory
@@ -56,6 +57,18 @@
         {{ flashSession.output() }}
         {% block content %}{% endblock %}
     </div>
+
+    <!-- Footer -->
+    <footer class="page-footer font-small blue pt-4">
+
+    <!-- Copyright -->
+    <div class="footer-copyright text-center py-3">© 2020 Copyright:
+        <a href="#"> NCCLabs</a>
+    </div>
+    <!-- Copyright -->
+
+    </footer>
+    <!-- Footer -->
 
     <!-- jQuery first, then Popper.js, and then Bootstrap's JavaScript -->
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>

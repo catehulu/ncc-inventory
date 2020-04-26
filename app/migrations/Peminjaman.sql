@@ -4,12 +4,16 @@
 CREATE TABLE [dbo].[Peminjaman](
 	[id] [int] IDENTITY(1,1) NOT NULL,
 	[nama] [varchar](50) NULL,
-	[email] [varchar](50) NULL,
-	[no_telp] [varchar](50) NULL,
-	[jumlah] [int] NULL,
 	[status] [int] NULL,
 	[inventaris_id] [int] NULL,
 	[kode] [char](5) NULL,
+	[email] [varchar](50) NULL,
+	[no_telp] [varchar](20) NULL,
+	[jumlah] [int] NULL,
+	[NRP] [char](14) NULL,
+	[tanggal_peminjaman] [date] NULL,
+	[tanggal_pengembalian] [date] NULL,
+	[deskripsi] [text] NULL,
  CONSTRAINT [PK_Peminjaman] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC
