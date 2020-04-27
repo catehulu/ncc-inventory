@@ -40,7 +40,7 @@ class Inventaris extends Model
                 [
                     'beforeCreate' => [
                         'field'  => 'created_at',
-                        'format' => 'Y-m-d H:i:sP',
+                        'format' => 'Y-m-d',
                     ]
                 ]
             )
@@ -51,7 +51,7 @@ class Inventaris extends Model
                 [
                     'beforeUpdate' => [
                         'field'  => 'updated_at',
-                        'format' => 'Y-m-d H:i:sP',
+                        'format' => 'Y-m-d',
                     ]
                 ]
             )

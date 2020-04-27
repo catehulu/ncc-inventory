@@ -14,6 +14,8 @@ CREATE TABLE [dbo].[Peminjaman](
 	[tanggal_peminjaman] [date] NULL,
 	[tanggal_pengembalian] [date] NULL,
 	[deskripsi] [text] NULL,
+	[created_at] [date] NULL,
+	[updated_at] [date] NULL,
  CONSTRAINT [PK_Peminjaman] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

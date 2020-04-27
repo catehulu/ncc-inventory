@@ -13,7 +13,7 @@
             <tr>
                 <th style='width: 25%'>NRP</th>
                 <td style='width: 25%'>:</td>
-                <td style='width: 25%'>{{ peminjam.nrp }}</td>
+                <td style='width: 25%'>{{ peminjam.NRP }}</td>
                 <td style='width: 25%'></td>
             </tr>
             <tr>

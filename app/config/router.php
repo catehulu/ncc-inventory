@@ -43,6 +43,14 @@ $router->addPost(
 );
 
 $router->addGet(
+    '/logout',
+    [
+        'controller' => 'users',
+        'action' => 'logout'
+    ]
+);
+
+$router->addGet(
     '/404',
     [
         'controller' => 'error',

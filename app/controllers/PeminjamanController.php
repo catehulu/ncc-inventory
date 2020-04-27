@@ -16,8 +16,16 @@ class PeminjamanController extends ControllerBase
 
     public function storeAction()
     {
+        $validation = new PeminjamanValidation();
+        $status = $validation->validate($this->request->getPost());
+        if (count($status)) {
+            foreach ($status as $message) {
+                $this->flashSession->error($message->getMessage());
+            }
+            return $this->_redirectBack();
+        }
         $nama = $this->request->getPost('nama');
-        $nrp = $this->request->getPost('nrp');
+        $NRP = $this->request->getPost('NRP');
         $email = $this->request->getPost('email');
         $no_telp = $this->request->getPost('no_telp');
         $tanggal_peminjaman = $this->request->getPost('tanggal_peminjaman');
@@ -45,7 +53,7 @@ class PeminjamanController extends ControllerBase
 
         $peminjaman = new Peminjaman;
         $peminjaman->nama = $nama;
-        $peminjaman->nrp = $nrp;
+        $peminjaman->NRP = $NRP;
         $peminjaman->email = $email;
         $peminjaman->no_telp = $no_telp;
         $peminjaman->status = $status;   
@@ -71,7 +79,7 @@ class PeminjamanController extends ControllerBase
           ]  
         );
 
-
+        
         $this->view->peminjam = $peminjam;
 
     }

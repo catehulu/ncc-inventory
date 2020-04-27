@@ -6,6 +6,8 @@ CREATE TABLE [dbo].[Inventaris](
 	[nama] [varchar](50) NULL,
 	[deskripsi] [text] NULL,
 	[jumlah] [int] NULL,
+	[created_at] [date] NULL,
+	[updated_at] [date] NULL,
  CONSTRAINT [PK_Inventaris] PRIMARY KEY CLUSTERED 
 (
 	[id] ASC

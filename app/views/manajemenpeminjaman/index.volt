@@ -38,7 +38,7 @@
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
             '<td>NRP:</td>'+
-            '<td>'+d.nrp+'</td>'+
+            '<td>'+d.NRP+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Nama:</td>'+
@@ -94,7 +94,7 @@
                     "data":           null,
                     "defaultContent": ''
                 },
-                { "data": "nrp" },
+                { "data": "NRP" },
                 { "data": "nama" },
                 { "data": "inventaris" , 'orderable': false},
                 { "data": "status", 'orderable': false },

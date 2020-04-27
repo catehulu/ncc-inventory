@@ -41,6 +41,7 @@ class IndexController extends ControllerBase
 
     public function loginAction()
     {
+        
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
@@ -67,13 +68,6 @@ class IndexController extends ControllerBase
             return $this->response->redirect('/login');
         }
 
-        return $this->response->redirect('/');
-    }
-
-    public function logoutAction()
-    {
-        $this->session->remove('auth');
-        $this->flashSession->success('Anda telah logout!');
         return $this->response->redirect('/');
     }
 }

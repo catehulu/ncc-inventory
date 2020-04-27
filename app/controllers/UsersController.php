@@ -36,5 +36,12 @@ class UsersController extends AuthControllerBase
         
     }
 
+    public function logoutAction()
+    {
+        $this->session->remove('auth');
+        $this->flashSession->success('Anda telah logout!');
+        return $this->response->redirect('/');
+    }
+
 }
 

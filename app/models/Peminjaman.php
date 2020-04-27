@@ -2,12 +2,19 @@
 declare(strict_types=1);
 
 use Phalcon\Mvc\Model;
+use Phalcon\Mvc\Model\Behavior\SoftDelete;
 use Phalcon\Mvc\Model\Behavior\Timestampable;
 
 class Peminjaman extends Model
 {
+    
+    const NOT_PROCESSED     = 0;
+    const ACCEPTED = 1;
+    const REJECTED = 2;
+    const DONE = 3;
+
     public $id;
-    public $nrp;
+    public $NRP;
     public $nama;
     public $email;
     public $no_telp;
@@ -33,7 +40,7 @@ class Peminjaman extends Model
                 [
                     'beforeCreate' => [
                         'field'  => 'created_at',
-                        'format' => 'Y-m-d H:i:sP',
+                        'format' => 'Y-m-d',
                     ]
                 ]
             )
@@ -44,8 +51,17 @@ class Peminjaman extends Model
                 [
                     'beforeUpdate' => [
                         'field'  => 'updated_at',
-                        'format' => 'Y-m-d H:i:sP',
+                        'format' => 'Y-m-d',
                     ]
+                ]
+            )
+        );
+        
+        $this->addBehavior(
+            new SoftDelete(
+                [
+                    'field' => 'status',
+                    'value' => Peminjaman::DONE,
                 ]
             )
         );

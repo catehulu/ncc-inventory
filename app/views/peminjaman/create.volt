@@ -9,9 +9,9 @@
 <div class="card-body">
 <form action="/peminjaman/store" method="post">
     <div class="form-group">
-        <label for="nrp">NRP</label>
-        <input type="input" class="form-control" id="nrp" name="nrp" aria-describedby="nrpHelp" placeholder="NRP" maxlength='15'>
-        <small id="nrp" class="form-text text-muted">Harap menggunakan NRP 14 digit</small>
+        <label for="NRP">NRP</label>
+        <input type="input" class="form-control" id="NRP" name="NRP" aria-describedby="nrpHelp" placeholder="NRP" maxlength='15'>
+        <small id="NRP" class="form-text text-muted">Harap menggunakan NRP 14 digit</small>
     </div>
     <div class="form-group">
         <label for="nama">Nama</label>

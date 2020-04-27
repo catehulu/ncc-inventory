@@ -11,6 +11,8 @@ use Phalcon\Mvc\View\Engine\Volt as VoltEngine;
 use Phalcon\Session\Adapter\Stream as SessionAdapter;
 use Phalcon\Session\Manager as SessionManager;
 use Phalcon\Url as UrlResolver;
+use \Phalcon\Mvc\Dispatcher as PhDispatcher;
+use Phalcon\Mvc\Dispatcher\Exception as DispatchException;
 
 /**
  * Shared configuration service
@@ -135,3 +137,33 @@ $di->set("flashSession", function () {
     ));
     return $flashSession;
 });
+
+$di->set(
+    'dispatcher',
+    function() use ($di) {
+
+        $evManager = $di->getShared('eventsManager');
+
+        $evManager->attach(
+            "dispatch:beforeException",
+            function($event, $dispatcher, $exception)
+            {
+                // Handle 404 exceptions
+                if ($exception instanceof DispatchException) {
+                    $dispatcher->forward(
+                        [
+                            'controller' => 'error',
+                            'action'     => 'notfound',
+                        ]
+                    );
+
+                    return false;
+                }
+            }
+        );
+        $dispatcher = new PhDispatcher();
+        $dispatcher->setEventsManager($evManager);
+        return $dispatcher;
+    },
+    true
+);

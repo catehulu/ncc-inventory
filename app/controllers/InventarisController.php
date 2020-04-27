@@ -103,14 +103,14 @@ class InventarisController extends AuthControllerBase
             $total_returned = $total_data;
 
             // Handle order and limit and search
-            $limit = $this->request->getPost('limit');
+            $limit = $this->request->getPost('length');
             $start = $this->request->getPost('start');
             $order_header = $this->request->getPost('order')[0];
             $order = $column[$order_header['column']];
             $dir = $order_header['dir'];
             $search = $this->request->getPost('search')['value'];
 
-            // return $this->response->setJsonContent($search)->send();
+            // return $this->response->setJsonContent($this->request->getPost())->send();
             if (empty($search)) {
                 $inventarises = Inventaris::find(
                     [

@@ -16,6 +16,7 @@ $loader->registerDirs(
         $config->application->libraryDir,
         $config->application->viewsDir,
         $config->application->cacheDir,
+        $config->application->validatorDir,
     ]
 )->register();
 
