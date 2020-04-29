@@ -18,11 +18,6 @@
             <img src="{{ this.url.get('img/ncc-logo.jpg') }}" height="30" class="d-inline-block align-top" alt="">
             NCC Inventory
         </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse">
             {% if this.session.has('auth') %}
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
@@ -35,7 +30,7 @@
                     <a class="nav-link" href="#">Logout</a>
                 </li> -->
             </ul>
-            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
+            <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
                     <a class="nav-link" href="/register"> Buat Akun </a>
                 </li>
@@ -45,13 +40,16 @@
             </ul>
             
             {% else %}
-            <ul class="navbar-nav flex-row ml-md-auto d-none d-md-flex">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/login"> Login </a>
+            <ul class="navbar-nav ml-auto">
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" id='searchKode' name='kode' type="search" placeholder="Kode" aria-label="Kode">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" onClick='submitKode()' >Search</button>
+                </form>
+                <li class="nav-item active  ">
+                    <a class="nav-link" href="/login" > Login </a>
                 </li>
             </ul>
             {% endif %}
-        </div>
     </nav>
 
     <div class="container">
@@ -77,6 +75,13 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
     <!-- DataTabels -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+    <script>
+        function submitKode() {
+            kode = $('#searchKode').val();
+            window.location = "{{ this.url.getBaseUri() }}peminjaman/kode/"+kode;
+        }
+    </script>
 
     {% block custom_js %}{% endblock %}
 </body>

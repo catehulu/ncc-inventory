@@ -1,5 +1,5 @@
 vendor/
 cache/
-apps/.env
+app/.env
 composer.lock
 .vscode

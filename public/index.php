@@ -14,6 +14,13 @@ define('APP_PATH', BASE_PATH . '/app');
 (new \Phalcon\Debug())->listen();
 
 require __DIR__ . '/../vendor/autoload.php';
+
+if (getenv('APPLICATION_ENV') !== 'production') {
+			$a = APP_PATH;
+			$envFile = ((getenv('APPLICATION_ENV') === 'testing') ? '.env.test' : '.env');
+			$dotEnv = Dotenv\Dotenv::createImmutable(APP_PATH, $envFile);
+			$dotEnv->load();
+    }
 /**
  * The FactoryDefault Dependency Injector automatically registers
  * the services that provide a full stack framework.
@@ -41,9 +48,10 @@ $config = $di->getConfig();
 include APP_PATH . '/config/loader.php';
 
 /**
- * Start the debugging process
+ * Set base URI
  */
 
+ $url = $di->get('url')->setBaseUri(getenv('BASE_URL'));
 
 /**
  * Handle the request
