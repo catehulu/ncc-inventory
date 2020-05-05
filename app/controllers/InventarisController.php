@@ -16,6 +16,12 @@ class InventarisController extends AuthControllerBase
 
     public function storeAction()
     {
+        if ($this->request->isPost()) {
+            if (!$this->security->checkToken()) {
+                $this->flashSession->error('Session error! refresh halaman');
+                return $this->_redirectBack();
+            }
+        }
         $nama = $this->request->getPost('nama');
         $deskripsi = $this->request->getPost('deskripsi');
         $jumlah = $this->request->getPost('jumlah');
@@ -52,6 +58,14 @@ class InventarisController extends AuthControllerBase
 
     public function updateAction()
     {
+
+        
+        if ($this->request->isPost()) {
+            if (!$this->security->checkToken()) {
+                $this->flashSession->error('Session error! refresh halaman');
+                return $this->_redirectBack();
+            }
+        }
         $id = $this->request->getPost('id');
         $nama = $this->request->getPost('nama');
         $jumlah = $this->request->getPost('jumlah');

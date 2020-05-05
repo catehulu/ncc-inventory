@@ -16,6 +16,12 @@ class PeminjamanController extends ControllerBase
 
     public function storeAction()
     {
+        if ($this->request->isPost()) {
+            if (!$this->security->checkToken()) {
+                $this->flashSession->error('Session error! refresh halaman');
+                return $this->_redirectBack();
+            }
+        }
         $validation = new PeminjamanValidation();
         $status = $validation->validate($this->request->getPost());
         if (count($status)) {

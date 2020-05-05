@@ -8,6 +8,7 @@
 </div>
 <div class="card-body mx-auto">
 	<form method='POST' action='/inventaris/store'>
+    <input type="text" name="{{ this.security.getTokenKey() }}" id="" value='{{ this.security.getToken() }}' hidden>
 	<div class="form-group input-group">
     	<div class="input-group-prepend">
 		    <span class="input-group-text" style="max-width: 50px">  </span>

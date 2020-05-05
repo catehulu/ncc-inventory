@@ -8,6 +8,7 @@
 </div>
 <div class="card-body">
 <form action="/peminjaman/store" method="post">
+    <input type="text" name="{{ this.security.getTokenKey() }}" id="" value='{{ this.security.getToken() }}' hidden>
     <div class="form-group">
         <label for="NRP">NRP</label>
         <input type="input" class="form-control" id="NRP" name="NRP" aria-describedby="nrpHelp" placeholder="NRP" maxlength='15'>
